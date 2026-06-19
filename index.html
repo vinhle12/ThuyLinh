@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌸LynBanQuen - tặng em bé🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0A1A;
+    --bg2: #130F24;
+    --pink: #FF85A1;
+    --pink2: #ff5c85;
+    --mint: #A8FFD8;
+    --purple: #C084FC;
+    --gold: #FFD580;
+    --text: #F5E6FF;
+    --muted: #9B8BB0;
+    --card: rgba(255,133,161,0.06);
+    --border: rgba(255,133,161,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── CANVAS LAYERS ── */
+  #starCanvas, #sakuraCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  #starCanvas { z-index: 0; }
+  #sakuraCanvas { z-index: 1; }
+
+  main { position: relative; z-index: 2; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--mint);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .lyn-name {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(5rem, 18vw, 12rem);
+    line-height: 1;
+    background: linear-gradient(135deg, #FF85A1, #C084FC, #A8FFD8, #FF85A1);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradShift 4s ease infinite, floatName 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255,133,161,0.6)) drop-shadow(0 0 60px rgba(192,132,252,0.4));
+    margin-bottom: 0.5rem;
+  }
+
+  .lyn-nickname {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: var(--muted);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .scorpio-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(192,132,252,0.12);
+    border: 1px solid rgba(192,132,252,0.3);
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+    color: var(--purple);
+    margin-bottom: 1rem;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    animation: bounce 2s ease-in-out infinite;
+    letter-spacing: 0.1em;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+  }
+
+  /* ── COUNTER ── */
+  .counter-section {
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: var(--text);
+  }
+
+  .counter-grid {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .counter-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    min-width: 140px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .counter-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,133,161,0.4);
+  }
+
+  .counter-num {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    color: var(--pink);
+    display: block;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255,133,161,0.4);
+  }
+
+  .counter-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── MAP ── */
+  .map-section {
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .map-container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    overflow: hidden;
+  }
+
+  .map-svg {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .distance-label {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--muted);
+  }
+  .distance-label span {
+    color: var(--pink);
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+
+  .flight-path {
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    animation: drawPath 3s ease forwards 0.5s;
+  }
+
+  .plane-icon {
+    animation: flyPlane 3s ease forwards 0.5s;
+    opacity: 0;
+  }
+
+  /* ── ABOUT LYN ── */
+  .about-section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.5rem;
+    transition: transform 0.3s, border-color 0.3s;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .about-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .about-card:hover {
+    border-color: rgba(255,133,161,0.4);
+    transform: translateY(-3px) !important;
+  }
+
+  .about-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .about-key {
+    font-size: 0.75rem;
+    color: var(--pink);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.3rem;
+  }
+
+  .about-val {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .about-sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    padding: 5rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .timeline {
+    position: relative;
+    margin-top: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--pink), var(--purple), transparent);
+    transform: translateX(-50%);
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    position: relative;
+  }
+  .tl-item.right {
+    flex-direction: row-reverse;
+    transform: translateX(30px);
+  }
+
+  .tl-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: 50%;
+    top: 0.5rem;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 12px var(--pink);
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  .tl-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    max-width: calc(50% - 2rem);
+    backdrop-filter: blur(10px);
+  }
+
+  .tl-item.right .tl-content { margin-left: auto; }
+
+  .tl-date {
+    font-size: 0.75rem;
+    color: var(--mint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .tl-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* ── PHOTOS ── */
+  .photos-section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .photo-placeholder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .photo-placeholder {
+    aspect-ratio: 3/4;
+    background: var(--card);
+    border: 1.5px dashed var(--border);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.3s;
+    opacity: 0;
+    transform: scale(0.9);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-placeholder.visible {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .photo-placeholder:hover {
+    border-color: rgba(255,133,161,0.5);
+    transform: scale(1.03) !important;
+  }
+
+  .photo-placeholder .p-icon { font-size: 2rem; }
+  .photo-placeholder img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    display: none;
+  }
+
+  .photo-upload-hint {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .upload-input { display: none; }
+
+  /* ── LETTER ── */
+  .letter-section {
+    padding: 5rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .letter-card {
+    background: linear-gradient(135deg, rgba(255,133,161,0.07), rgba(192,132,252,0.07));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+
+  .letter-card::before {
+    content: '✉';
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 8rem;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  .letter-font {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.35rem;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .letter-font p { margin-bottom: 1rem; }
+
+  .letter-sign {
+    margin-top: 2rem;
+    text-align: right;
+    font-family: 'Pacifico', cursive;
+    color: var(--pink);
+    font-size: 1.2rem;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-section {
+    padding: 5rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .quiz-q {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .quiz-num {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .quiz-opt {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .quiz-opt:hover { border-color: rgba(255,133,161,0.5); background: rgba(255,133,161,0.08); }
+  .quiz-opt.correct { border-color: var(--mint); background: rgba(168,255,216,0.1); color: var(--mint); }
+  .quiz-opt.wrong { border-color: rgba(255,90,90,0.5); background: rgba(255,90,90,0.08); color: #ff7070; }
+
+  .quiz-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 700;
+    display: none;
+  }
+
+  .quiz-score {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .quiz-score .big-score {
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+    color: var(--pink);
+    display: block;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(255,133,161,0.5);
+  }
+
+  .quiz-next {
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    border: none;
+    border-radius: 100px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    display: none;
+  }
+  .quiz-next:hover { opacity: 0.9; transform: scale(1.03); }
+
+  /* ── MUSIC PLAYER ── */
+  .music-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255,133,161,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .music-btn:hover { transform: scale(1.1); }
+  .music-btn.playing { animation: spinSlow 3s linear infinite; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+
+  footer .footer-name {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: var(--pink);
+    display: block;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(255,133,161,0.4);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 600px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes gradShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes floatName {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes drawPath {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @media (max-width: 600px) {
+    .timeline::before { left: 20px; }
+    .tl-item, .tl-item.right { flex-direction: column; padding-left: 50px; }
+    .tl-dot { left: 20px; }
+    .tl-content { max-width: 100%; }
+    .tl-item.right .tl-content { margin-left: 0; }
+    .counter-grid { gap: 0.75rem; }
+    .counter-card { padding: 1.5rem; min-width: 100px; }
+    .counter-num { font-size: 2.5rem; }
+    .letter-card { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+<canvas id="sakuraCanvas"></canvas>
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-eyebrow">✨ Dành riêng cho một người đặc biệt trong lòng tớ ✨</div>
+    <h1 class="lyn-name">THUYLYN</h1>
+    <p class="lyn-nickname">@LynBanQuyen 🌸</p>
+    <div class="scorpio-badge">♏ Bọ Cạp · 06.11.2007</div>
+    <p class="hero-tagline">Từ những video Liên Quân trên TikTok đến một người mình luôn muốn biết thêm và tìm hiểu thêm — cảm ơn Lyn đã xuất hiện trong đời tớ.</p>
+    <div class="scroll-hint">Cuộn Xuống</div>
+  </section>
+
+  <!-- ── COUNTER ── -->
+  <section class="counter-section">
+    <p class="section-label">kể từ khi mình biết nhau</p>
+    <h2 class="section-title">Đã qua bao lâu rồi nhỉ ta? 🕰️</h2>
+    <div class="counter-grid">
+      <div class="counter-card">
+        <span class="counter-num" id="cnt-days">95</span>
+        <div class="counter-label">ngày</div>
+      </div>
+      <div class="counter-card">
+        <span class="counter-num" id="cnt-hours">2.287</span>
+        <div class="counter-label">giờ</div>
+      </div>
+      <div class="counter-card">
+        <span class="counter-num" id="cnt-mins">137.249</span>
+        <div class="counter-label">phút</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── MAP ── -->
+  <section class="map-section">
+    <p class="section-label">khoảng cách</p>
+    <h2 class="section-title">Việt Nam ↔ Hàn Quốc ✈️</h2>
+    <div class="map-container">
+      <svg class="map-svg" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glowVN" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FF85A1" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#FF85A1" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glowKR" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#A8FFD8" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#A8FFD8" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,1 L10,5 L0,9 Z" fill="#A8FFD8"/>
+          </marker>
+        </defs>
+
+        <!-- Ocean bg -->
+        <rect width="600" height="360" fill="rgba(0,0,0,0)" rx="16"/>
+
+        <!-- Vietnam shape (simplified) -->
+        <ellipse cx="100" cy="220" rx="35" ry="65" fill="rgba(255,133,161,0.2)" stroke="#FF85A1" stroke-width="1.5"/>
+        <circle cx="100" cy="220" r="55" fill="url(#glowVN)"/>
+        <text x="100" y="180" text-anchor="middle" fill="#FF85A1" font-family="Nunito, sans-serif" font-size="13" font-weight="700">Việt Nam</text>
+        <text x="100" y="197" text-anchor="middle" fill="#FF85A1" font-family="Nunito, sans-serif" font-size="10" opacity="0.7">🏠 Hà Nội</text>
+        <circle cx="100" cy="215" r="6" fill="#FF85A1" filter="url(#glow)"/>
+        <circle cx="100" cy="215" r="12" fill="#FF85A1" opacity="0.15"/>
+
+        <!-- Korea shape (simplified) -->
+        <ellipse cx="490" cy="150" rx="38" ry="50" fill="rgba(168,255,216,0.2)" stroke="#A8FFD8" stroke-width="1.5"/>
+        <circle cx="490" cy="150" r="60" fill="url(#glowKR)"/>
+        <text x="490" y="112" text-anchor="middle" fill="#A8FFD8" font-family="Nunito, sans-serif" font-size="13" font-weight="700">Hàn Quốc</text>
+        <text x="490" y="129" text-anchor="middle" fill="#A8FFD8" font-family="Nunito, sans-serif" font-size="10" opacity="0.7">✈️ Cheonan</text>
+        <circle cx="490" cy="147" r="6" fill="#A8FFD8" filter="url(#glow)"/>
+        <circle cx="490" cy="147" r="12" fill="#A8FFD8" opacity="0.15"/>
+
+        <!-- Flight path -->
+        <path class="flight-path" d="M120,210 Q300,60 472,155"
+          fill="none" stroke="#A8FFD8" stroke-width="2" stroke-dasharray="8,4"
+          marker-end="url(#arrow)" opacity="0.8"/>
+
+        <!-- Plane (drawn with path) -->
+        <g class="plane-icon" id="plane">
+          <text font-size="20" text-anchor="middle">✈️</text>
+        </g>
+
+        <!-- Distance label -->
+        <rect x="220" y="140" width="160" height="40" rx="10" fill="rgba(192,132,252,0.12)" stroke="rgba(192,132,252,0.3)" stroke-width="1"/>
+        <text x="300" y="156" text-anchor="middle" fill="#C084FC" font-family="Nunito, sans-serif" font-size="11" font-weight="700">~2,700 km</text>
+        <text x="300" y="173" text-anchor="middle" fill="#C084FC" font-family="Nunito, sans-serif" font-size="10" opacity="0.7">khoảng 4.5 giờ bay</text>
+      </svg>
+      <p class="distance-label">Dù cách nhau <span>2,700 km</span>, tim vẫn gần ❤️</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── ABOUT LYN ── -->
+  <section class="about-section">
+    <p class="section-label">chân dung</p>
+    <h2 class="section-title" style="text-align:center">Lyn là ai vậy nhỉ? 💫</h2>
+    <div class="about-grid" id="aboutGrid">
+      <div class="about-card">
+        <span class="about-icon">🌸</span>
+        <div class="about-key">Nickname</div>
+        <div class="about-val">LynBanQuyen</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">♏</span>
+        <div class="about-key">Cung hoàng đạo</div>
+        <div class="about-val">Bọ Cạp</div>
+        <div class="about-sub">Bí ẩn, mạnh mẽ &amp; trung thành</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🎂</span>
+        <div class="about-key">Sinh nhật</div>
+        <div class="about-val">06.11.2007</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🇰🇷</span>
+        <div class="about-key">Đang sống</div>
+        <div class="about-val">Hàn Quốc</div>
+        <div class="about-sub">Du học sinh 🎓</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🏡</span>
+        <div class="about-key">Quê hương</div>
+        <div class="about-val">Thái Nguyên</div>
+        <div class="about-sub">Vùng chè thơm 🍃</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🛍️</span>
+        <div class="about-key">Sở thích</div>
+        <div class="about-val">Mua sắm-Socola-Một mình</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🎭</span>
+        <div class="about-key">Đam mê</div>
+        <div class="about-val">Cosplay</div>
+        <div class="about-sub">Bé này thích vibe Gaw Gura nhe ✨</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🎮</span>
+        <div class="about-key">Gặp nhau qua</div>
+        <div class="about-val">TikTok (video Liên quân nhe) </div>
+        <div class="about-sub">15.1k followers ❤️</div>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🌙</span>
+        <div class="about-key">Tính cách</div>
+        <div class="about-val">Ngoài lạnh, trong ấm</div>
+        <div class="about-sub">Một khi quen sẽ rất dễ thương</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── TIMELINE ── -->
+  <section class="timeline-section">
+    <p class="section-label" style="text-align:center">hành trình</p>
+    <h2 class="section-title" style="text-align:center">Từ xa lạ đến thân quen 🌙</h2>
+    <div class="timeline" id="timeline">
+      <div class="tl-item" id="tl0">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">Lần đầu tiên</div>
+          <div class="tl-text">Vô tình lướt thấy video Liên Quân của Lyn trên TikTok. Dừng lại, xem lại, vào trang cá nhân. Và bắt đầu tò mò về người con gái này. 🎮</div>
+        </div>
+      </div>
+      <div class="tl-item right" id="tl1">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">Khám phá thêm</div>
+          <div class="tl-text">Biết thêm Lyn có 15.1k TikTok, 11k Facebook. Qua nhắn tin thì cô gái lạnh lùng nhưng có sức hút riêng — không phải ai cũng thấy được điều đó. ✨</div>
+        </div>
+      </div>
+      <div class="tl-item" id="tl2">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">Hiểu ra</div>
+          <div class="tl-text">Lyn không thích nói chuyện nhiều, khép mình — nhưng đó không phải điểm yếu. Đó là bức tường của người có nội tâm sâu sắc, đỉnh quá rồi đó. 💜</div>
+        </div>
+      </div>
+      <div class="tl-item right" id="tl3">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">Hôm nay</div>
+          <div class="tl-text">Tạo ra trang web này. Không chỉ để nói cảm xúc — mà để Lyn biết: có người thấy con người thật của Lyn và trân trọng điều đó. Lyn vẫn luôn là Lyn. 🌸</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── PHOTOS ── -->
+  <section class="photos-section">
+    <p class="section-label">kỷ niệm</p>
+    <h2 class="section-title">Album của Lyn 📸</h2>
+    <input type="file" id="photoUpload" class="upload-input" accept="image/*" multiple>
+    <div class="photo-placeholder-grid" id="photoGrid">
+      <div class="photo-placeholder" onclick="triggerUpload(0)">
+        <img id="photo0" alt="">
+        <div class="p-content">
+          <div class="p-icon">🌸</div>
+          <div>Thêm ảnh</div>
+        </div>
+      </div>
+      <div class="photo-placeholder" onclick="triggerUpload(1)">
+        <img id="photo1" alt="">
+        <div class="p-content">
+          <div class="p-icon">💜</div>
+          <div>Thêm ảnh</div>
+        </div>
+      </div>
+      <div class="photo-placeholder" onclick="triggerUpload(2)">
+        <img id="photo2" alt="">
+        <div class="p-content">
+          <div class="p-icon">✨</div>
+          <div>Thêm ảnh</div>
+        </div>
+      </div>
+      <div class="photo-placeholder" onclick="triggerUpload(3)">
+        <img id="photo3" alt="">
+        <div class="p-content">
+          <div class="p-icon">🎮</div>
+          <div>Thêm ảnh</div>
+        </div>
+      </div>
+      <div class="photo-placeholder" onclick="triggerUpload(4)">
+        <img id="photo4" alt="">
+        <div class="p-content">
+          <div class="p-icon">🇰🇷</div>
+          <div>Thêm ảnh</div>
+        </div>
+      </div>
+      <div class="photo-placeholder" onclick="triggerUpload(5)">
+        <img id="photo5" alt="">
+        <div class="p-content">
+          <div class="p-icon">🌙</div>
+          <div>Thêm ảnh</div>
+        </div>
+      </div>
+    </div>
+    <p class="photo-upload-hint">Click vào ô để thêm ảnh của Lyn vào album nhé 💕<br>Ảnh chỉ lưu trong trình duyệt hiện tại.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── LETTER ── -->
+  <section class="letter-section">
+    <p class="section-label">thư gửi Lyn</p>
+    <h2 class="section-title">Lời từ trái tim 💌</h2>
+    <div class="letter-card">
+      <div class="letter-font">
+        <p>Lyn ơi,</p>
+        <p>Vinh không biết bắt đầu từ đâu vì với Vinh, Lyn xuất hiện rất bình thường, qua một clip đơn giản chỉ là Liqi trên TikTok. Nhưng rồi Vinh lại cứ quay lại, lại xem, lại tìm hiểu thêm.</p>
+        <p>Vinh biết Lyn không thích nói chuyện nhiều, khép mình. Và Vinh không cố thay đổi điều đó. Chỉ là... Vinh thấy được điều mà nhiều người bỏ qua một người con gái có nội tâm rất sâu, có sức hút riêng mà không cần phải chứng minh với ai.</p>
+        <p>Lyn có tiềm năng rất lớn. TikTok 15k, Facebook 11k nhưng mà Vinh nghĩ điều thú vị nhất ở Lyn không phải những con số đó. Mà là con người thật sau màn hình cô gái đơn giản là chỉ thích socola khi stress, thích cosplay, thích ở một mình, thích mua sắm, ghét sự giả dối.</p>
+        <p>Cảm ơn Lyn vì đã tồn tại. Dù cách nhau 2,700 km, Vinh vẫn muốn Lyn biết điều này là Vinh yêu Linh rất rất nhiều nhưng mà tình cảm đó Vinh nên cất lại vì hiện tại Vinh chưa có gì để chứng minh với Lyn cả. 🌸</p>
+      </div>
+      <div class="letter-sign">Lê Thành Vinh ❤️</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── QUIZ ── -->
+  <section class="quiz-section">
+    <p class="section-label">MINI GAME?</p>
+    <h2 class="section-title">Thử thách hiểu Lyn 🎯</h2>
+    <div class="quiz-card" id="quizCard">
+      <div id="quizContent">
+        <div class="quiz-num" id="quizNum">Câu 1 / 5</div>
+        <div class="quiz-q" id="quizQ">Lyn đang sống ở đâu?</div>
+        <div class="quiz-options" id="quizOpts"></div>
+        <div class="quiz-result" id="quizResult"></div>
+        <button class="quiz-next" id="quizNext" onclick="nextQ()">Câu tiếp theo →</button>
+      </div>
+      <div class="quiz-score" id="quizScore">
+        <span class="big-score" id="scoreNum">0/5</span>
+        <div id="scoreTxt"></div>
+        <button class="quiz-next" style="display:inline-block;margin-top:1.5rem" onclick="restartQuiz()">Chơi lại 🔄</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span class="footer-name">Lyn 🌸</span>
+    <div>06.11.2007 · ♏ Bọ Cạp · Thái Nguyên × Cheonan</div>
+    <div style="margin-top:0.5rem">Được tạo với ❤️ — chỉ dành riêng cho một người</div>
+  </footer>
+
+</main>
+
+<!-- Music Button removed: autoplay handled on first interaction -->
+
+<script>
+// ── STARS ──
+const starCanvas = document.getElementById('starCanvas');
+const sCtx = starCanvas.getContext('2d');
+let stars = [];
+
+function resizeCanvas() {
+  starCanvas.width = window.innerWidth;
+  starCanvas.height = window.innerHeight;
+  sakuraCanvas.width = window.innerWidth;
+  sakuraCanvas.height = window.innerHeight;
+}
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * starCanvas.width,
+      y: Math.random() * starCanvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random(),
+      speed: Math.random() * 0.01 + 0.005,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawStars(t) {
+  sCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+  stars.forEach(s => {
+    const alpha = 0.3 + 0.7 * Math.abs(Math.sin(t * s.speed + s.phase));
+    sCtx.beginPath();
+    sCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    sCtx.fillStyle = `rgba(255,255,255,${alpha})`;
+    sCtx.fill();
+  });
+}
+
+// ── SAKURA ──
+const sakuraCanvas = document.getElementById('sakuraCanvas');
+const pCtx = sakuraCanvas.getContext('2d');
+let petals = [];
+
+const PETAL_COLORS = ['rgba(255,133,161,0.7)','rgba(255,192,203,0.6)','rgba(255,160,180,0.65)','rgba(220,150,200,0.6)'];
+
+function initPetals() {
+  petals = [];
+  const count = Math.min(40, Math.floor(window.innerWidth / 20));
+  for (let i = 0; i < count; i++) {
+    petals.push(newPetal(true));
+  }
+}
+
+function newPetal(scattered) {
+  return {
+    x: Math.random() * sakuraCanvas.width,
+    y: scattered ? Math.random() * sakuraCanvas.height : -20,
+    r: Math.random() * 6 + 4,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: Math.random() * 0.8 + 0.3,
+    rot: Math.random() * Math.PI * 2,
+    rotV: (Math.random() - 0.5) * 0.03,
+    color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
+    sway: Math.random() * Math.PI * 2,
+    swayS: Math.random() * 0.015 + 0.005
+  };
+}
+
+function drawPetal(p) {
+  pCtx.save();
+  pCtx.translate(p.x, p.y);
+  pCtx.rotate(p.rot);
+  pCtx.fillStyle = p.color;
+  pCtx.beginPath();
+  pCtx.ellipse(0, 0, p.r, p.r * 0.6, 0, 0, Math.PI * 2);
+  pCtx.fill();
+  pCtx.restore();
+}
+
+function updatePetals() {
+  petals.forEach(p => {
+    p.sway += p.swayS;
+    p.x += p.vx + Math.sin(p.sway) * 0.4;
+    p.y += p.vy;
+    p.rot += p.rotV;
+    if (p.y > sakuraCanvas.height + 20) Object.assign(p, newPetal(false));
+    if (p.x < -20 || p.x > sakuraCanvas.width + 20) p.x = Math.random() * sakuraCanvas.width;
+  });
+}
+
+function drawPetals() {
+  pCtx.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
+  petals.forEach(drawPetal);
+}
+
+// ── MAIN LOOP ──
+let t = 0;
+function loop() {
+  t++;
+  drawStars(t);
+  updatePetals();
+  drawPetals();
+  requestAnimationFrame(loop);
+}
+
+resizeCanvas();
+initStars();
+initPetals();
+loop();
+window.addEventListener('resize', () => { resizeCanvas(); initStars(); initPetals(); });
+
+// ── COUNTER ──
+// Set the "met" date here (adjust as needed)
+const metDate = new Date('2026-03-15T19:10:00');
+
+function updateCounter() {
+  const now = new Date();
+  const diff = now - metDate;
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+  document.getElementById('cnt-days').textContent = days;
+  document.getElementById('cnt-hours').textContent = hours;
+  document.getElementById('cnt-mins').textContent = mins;
+}
+updateCounter();
+setInterval(updateCounter, 60000);
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.about-card, .photo-placeholder, .tl-item').forEach(el => observer.observe(el));
+
+// ── PHOTOS ──
+let currentPhotoSlot = 0;
+const photoUpload = document.getElementById('photoUpload');
+
+function triggerUpload(slot) {
+  currentPhotoSlot = slot;
+  photoUpload.click();
+}
+
+photoUpload.addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const img = document.getElementById('photo' + currentPhotoSlot);
+  img.src = url;
+  img.style.display = 'block';
+  const placeholder = img.parentElement;
+  placeholder.querySelector('.p-content') && (placeholder.querySelector('.p-content').style.display = 'none');
+  this.value = '';
+});
+
+// ── QUIZ ──
+const questions = [
+  { q: "Lyn đang sống ở đâu?", opts: ["Hà Nội 🇻🇳", "Cheonan, Hàn Quốc 🇰🇷", "Tokyo, Nhật Bản 🇯🇵", "TP.HCM 🌆"], ans: 1 },
+  { q: "Cung hoàng đạo của Lyn là gì?", opts: ["Song Tử ♊", "Xử Nữ ♍", "Bọ Cạp ♏", "Ma Kết ♑"], ans: 2 },
+  { q: "Lyn ghét điều gì nhất?", opts: ["Ăn uống 🍔", "Nói dối 🙅", "Gaming 🎮", "Mua sắm 🛍️"], ans: 1 },
+  { q: "Lyn có bao nhiêu followers trên TikTok?", opts: ["15k", "16k", "15.1k", "15.2k"], ans: 2 },
+];
+
+let qi = 0, score = 0, answered = false;
+
+function renderQ() {
+  const q = questions[qi];
+  document.getElementById('quizNum').textContent = `Câu ${qi+1} / ${questions.length}`;
+  document.getElementById('quizQ').textContent = q.q;
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizNext').style.display = 'none';
+  answered = false;
+  const opts = document.getElementById('quizOpts');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = o;
+    btn.onclick = () => checkAns(i, btn);
+    opts.appendChild(btn);
+  });
+}
+
+function checkAns(i, btn) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  const result = document.getElementById('quizResult');
+  const allBtns = document.querySelectorAll('.quiz-opt');
+  allBtns.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === q.ans) b.classList.add('correct');
+  });
+  if (i === q.ans) {
+    score++;
+    btn.classList.add('correct');
+    result.textContent = '✅ Chính xác! Bạn hiểu Lyn rồi đó!';
+    result.style.background = 'rgba(168,255,216,0.1)';
+    result.style.color = 'var(--mint)';
+  } else {
+    btn.classList.add('wrong');
+    result.textContent = '❌ Sai rồi! Cần tìm hiểu thêm về Lyn nhé~';
+    result.style.background = 'rgba(255,90,90,0.08)';
+    result.style.color = '#ff7070';
+  }
+  result.style.display = 'block';
+  document.getElementById('quizNext').style.display = qi < questions.length - 1 ? 'inline-block' : 'none';
+  if (qi === questions.length - 1) {
+    setTimeout(showScore, 1200);
+  }
+}
+
+function nextQ() { qi++; renderQ(); }
+
+function showScore() {
+  document.getElementById('quizContent').style.display = 'none';
+  const s = document.getElementById('quizScore');
+  s.style.display = 'block';
+  document.getElementById('scoreNum').textContent = score + '/' + questions.length;
+  const msgs = ['Cần tìm hiểu thêm về Lyn nhé! 😅', 'Khá ổn rồi! 👍', 'Bạn hiểu Lyn khá nhiều đó! 💜', 'Wow, bạn là fan cứng của Lyn! 🌸', 'Hiểu Lyn hoàn toàn rồi! ✨💜'];
+  document.getElementById('scoreTxt').textContent = msgs[Math.min(score, 4)];
+}
+
+function restartQuiz() {
+  qi = 0; score = 0;
+  document.getElementById('quizScore').style.display = 'none';
+  document.getElementById('quizContent').style.display = 'block';
+  renderQ();
+}
+
+renderQ();
+
+// ── MUSIC ──
+const bgMusic = document.getElementById('bgMusic');
+let playing = false;
+let autoplayInitialized = false;
+
+// gentle background volume for a "ru rưa" vibe
+bgMusic.volume = 0.12;
+bgMusic.loop = true;
+
+function initAutoplay() {
+  if (autoplayInitialized) return;
+  autoplayInitialized = true;
+  bgMusic.play().then(() => {
+    playing = true;
+  }).catch(() => {
+    // autoplay blocked or failed silently
+  });
+}
+
+// Start playback on first user interaction (click/touch/keyboard)
+window.addEventListener('click', initAutoplay, { once: true });
+window.addEventListener('touchstart', initAutoplay, { once: true });
+window.addEventListener('keydown', initAutoplay, { once: true });
+
+// ── PLANE ANIMATION ──
+(function animatePlane() {
+  const plane = document.getElementById('plane');
+  if (!plane) return;
+  let progress = 0;
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M120,210 Q300,60 472,155');
+  const totalLen = path.getTotalLength();
+
+  function step() {
+    if (progress >= 1) { progress = 0; }
+    progress += 0.003;
+    const pt = path.getPointAtLength(progress * totalLen);
+    const pt2 = path.getPointAtLength(Math.min((progress + 0.01) * totalLen, totalLen));
+    const angle = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180 / Math.PI;
+    plane.setAttribute('transform', `translate(${pt.x},${pt.y}) rotate(${angle})`);
+    plane.setAttribute('opacity', '1');
+    requestAnimationFrame(step);
+  }
+  setTimeout(step, 600);
+})();
+</script>
+</body>
+</html>
