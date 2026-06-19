@@ -582,6 +582,84 @@
   }
   .quiz-next:hover { opacity: 0.9; transform: scale(1.03); }
 
+  .gallery-section {
+    padding: 120px 20px;
+    text-align: center;
+  }
+
+  .gallery-title {
+    font-size: 3rem;
+    margin-bottom: 50px;
+  }
+
+  .carousel {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 650px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 30px;
+    transform: translate(-50%,-50%) scale(.7);
+    opacity: .3;
+    filter: blur(3px);
+    transition: all .8s ease;
+    box-shadow: 0 30px 60px rgba(0,0,0,.35);
+  }
+
+  .slide.active {
+    opacity: 1;
+    filter: none;
+    transform: translate(-50%,-50%) scale(1);
+    z-index: 3;
+  }
+
+  .slide.left {
+    transform: translate(-120%,-50%) scale(.8);
+    opacity: .6;
+    z-index: 2;
+  }
+
+  .slide.right {
+    transform: translate(20%,-50%) scale(.8);
+    opacity: .6;
+    z-index: 2;
+  }
+
+  .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,.15);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+
+  .prev { left: 30px; }
+  .next { right: 30px; }
+
   /* ── MUSIC PLAYER ── */
   .music-btn {
     position: fixed;
@@ -879,56 +957,25 @@
 
   <div class="divider"></div>
 
-  <!-- ── PHOTOS ── -->
-  <section class="photos-section">
-    <p class="section-label">kỷ niệm</p>
-    <h2 class="section-title">Album của Lyn 📸</h2>
-    <input type="file" id="photoUpload" class="upload-input" accept="image/*" multiple>
-    <div class="photo-placeholder-grid" id="photoGrid">
-      <div class="photo-placeholder" onclick="triggerUpload(0)">
-        <img id="photo0" alt="">
-        <div class="p-content">
-          <div class="p-icon">🌸</div>
-          <div>Thêm ảnh</div>
-        </div>
+  <!-- ── GALLERY ── -->
+  <section class="gallery-section">
+    <h2 class="gallery-title">Ảnh của bé yêu nè ✨</h2>
+    <div class="carousel">
+      <button class="nav prev">❮</button>
+      <div class="carousel-track">
+        <img src="image1.jpg" class="slide active">
+        <img src="image2.jpg" class="slide">
+        <img src="image3.jpg" class="slide">
+        <img src="image4.jpg" class="slide">
+        <img src="image5.jpg" class="slide">
+        <img src="image6.jpg" class="slide">
+        <img src="image7.jpg" class="slide">
+        <img src="image8.jpg" class="slide">
+        <img src="image9.jpg" class="slide">
+        <img src="image10.jpg" class="slide">
       </div>
-      <div class="photo-placeholder" onclick="triggerUpload(1)">
-        <img id="photo1" alt="">
-        <div class="p-content">
-          <div class="p-icon">💜</div>
-          <div>Thêm ảnh</div>
-        </div>
-      </div>
-      <div class="photo-placeholder" onclick="triggerUpload(2)">
-        <img id="photo2" alt="">
-        <div class="p-content">
-          <div class="p-icon">✨</div>
-          <div>Thêm ảnh</div>
-        </div>
-      </div>
-      <div class="photo-placeholder" onclick="triggerUpload(3)">
-        <img id="photo3" alt="">
-        <div class="p-content">
-          <div class="p-icon">🎮</div>
-          <div>Thêm ảnh</div>
-        </div>
-      </div>
-      <div class="photo-placeholder" onclick="triggerUpload(4)">
-        <img id="photo4" alt="">
-        <div class="p-content">
-          <div class="p-icon">🇰🇷</div>
-          <div>Thêm ảnh</div>
-        </div>
-      </div>
-      <div class="photo-placeholder" onclick="triggerUpload(5)">
-        <img id="photo5" alt="">
-        <div class="p-content">
-          <div class="p-icon">🌙</div>
-          <div>Thêm ảnh</div>
-        </div>
-      </div>
+      <button class="nav next">❯</button>
     </div>
-    <p class="photo-upload-hint">Click vào ô để thêm ảnh của Lyn vào album nhé 💕<br>Ảnh chỉ lưu trong trình duyệt hiện tại.</p>
   </section>
 
   <div class="divider"></div>
@@ -1121,26 +1168,45 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.about-card, .photo-placeholder, .tl-item').forEach(el => observer.observe(el));
 
-// ── PHOTOS ──
-let currentPhotoSlot = 0;
-const photoUpload = document.getElementById('photoUpload');
+// ── CAROUSEL GALLERY ──
+const slides = document.querySelectorAll('.slide');
+let current = 0;
 
-function triggerUpload(slot) {
-  currentPhotoSlot = slot;
-  photoUpload.click();
+function updateCarousel() {
+  slides.forEach(slide => {
+    slide.classList.remove('active', 'left', 'right');
+  });
+
+  slides[current].classList.add('active');
+  slides[(current - 1 + slides.length) % slides.length].classList.add('left');
+  slides[(current + 1) % slides.length].classList.add('right');
 }
 
-photoUpload.addEventListener('change', function() {
-  const file = this.files[0];
-  if (!file) return;
-  const url = URL.createObjectURL(file);
-  const img = document.getElementById('photo' + currentPhotoSlot);
-  img.src = url;
-  img.style.display = 'block';
-  const placeholder = img.parentElement;
-  placeholder.querySelector('.p-content') && (placeholder.querySelector('.p-content').style.display = 'none');
-  this.value = '';
-});
+document.querySelector('.next').onclick = () => {
+  current++;
+  if (current >= slides.length) {
+    current = 0;
+  }
+  updateCarousel();
+};
+
+document.querySelector('.prev').onclick = () => {
+  current--;
+  if (current < 0) {
+    current = slides.length - 1;
+  }
+  updateCarousel();
+};
+
+setInterval(() => {
+  current++;
+  if (current >= slides.length) {
+    current = 0;
+  }
+  updateCarousel();
+}, 4000);
+
+updateCarousel();
 
 // ── QUIZ ──
 const questions = [
