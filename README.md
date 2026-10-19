@@ -4,9 +4,10 @@ Giao diện nền sao và hoa rơi, bộ đếm kỷ niệm, sơ đồ khoảng 
 
 ## Cá nhân hóa cho từng khách
 
-Chỉnh **config.js** để thay tên người nhận, tên người gửi, biệt danh, ngày sinh, địa điểm, sở thích, các mốc kỷ niệm và nội dung thư. Tên người nhận sẽ tự cập nhật ở đầu trang, thư, chân trang và tiêu đề trình duyệt.
+Chỉnh **config.js** để thay tên người nhận, tên người gửi, biệt danh, ngày kỷ niệm, địa điểm, sở thích, các mốc kỷ niệm và nội dung thư. Tên người nhận sẽ tự cập nhật ở đầu trang, thư, chân trang và tiêu đề trình duyệt.
 
 - **metAt**: điền ngày bắt đầu theo dạng YYYY-MM-DDTHH:mm:ss+07:00. Để trống sẽ hiển thị --, không sử dụng ngày cũ.
+- **anniversaryLabel**: ngày kỷ niệm hiển thị trên trang, cần khớp với metAt.
 - **timeline**: gồm bốn mốc; thay tiêu đề và lời kể của từng mốc.
 - **letter**: mỗi chuỗi là một đoạn thư.
 - **photos**: để trống sẽ hiện khung ảnh mẫu. Để thêm ảnh thật, tải các tệp ảnh của khách lên repo rồi thêm các mục có src và alt vào danh sách.

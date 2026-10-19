@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tên người thương — Gửi người thương</title>
-<meta name="description" content="Một trang quà tặng lưu giữ kỷ niệm, lời nhắn và những khoảnh khắc của hai người thương.">
+<title>Trần Phạm Thùy Trang — Gửi Nhím</title>
+<meta name="description" content="Gửi Nhím — từ Lunar đến MTCozy, câu chuyện yêu thương của chúng mình bắt đầu ngày 09/08/2026.">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
 
@@ -642,6 +642,7 @@
   .counter-hint { color: var(--muted); margin-top: 1.5rem; font-size: 0.85rem; }
   .gallery-title { font-size: clamp(1.6rem, 5vw, 3rem); }
   .slide { width: min(650px, 75vw); height: min(400px, 60vw); }
+  img.slide { object-fit: contain; background: #0D0A1A; }
   .photo-sample {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 1rem; border: 1px solid var(--border); color: var(--text);
@@ -682,10 +683,10 @@
 <main>
   <section class="hero">
     <div class="hero-eyebrow">✨ Dành riêng cho một người đặc biệt ✨</div>
-    <h1 class="recipient-name" data-text="recipientName">Tên người thương</h1>
-    <p class="recipient-nickname" data-text="recipientNickname">Biệt danh thân thương 🌸</p>
-    <div class="profile-badge">🎂 <span data-text="birthday">Ngày sinh nhật</span> · <span data-text="zodiac">Cung hoàng đạo</span></div>
-    <p class="hero-tagline" data-text="heroMessage">Một góc nhỏ dành riêng cho người thương, nơi lưu giữ những điều dịu dàng của hai chúng mình.</p>
+    <h1 class="recipient-name" data-text="recipientName">Trần Phạm Thùy Trang</h1>
+    <p class="recipient-nickname" data-text="recipientNickname">Nhím 🦔</p>
+    <div class="profile-badge">♈ <span data-text="zodiac">Bạch Dương</span> · 💗 <span data-text="anniversaryLabel">09/08/2026</span></div>
+    <p class="hero-tagline" data-text="heroMessage">Từ Lunar đến MTCozy, từ những người bạn trong Minecraft đến hai người thương của nhau. Câu chuyện của chúng mình bắt đầu như thế. 💗</p>
     <div class="scroll-hint">Cuộn xuống</div>
   </section>
 
@@ -697,7 +698,7 @@
       <div class="counter-card"><span class="counter-num" id="cnt-hours">--</span><div class="counter-label">giờ</div></div>
       <div class="counter-card"><span class="counter-num" id="cnt-mins">--</span><div class="counter-label">phút</div></div>
     </div>
-    <p class="counter-hint" id="counterHint">Ngày kỷ niệm của chúng mình 💗</p>
+    <p class="counter-hint" id="counterHint">Bên nhau từ <span data-text="anniversaryLabel">09/08/2026</span> 💗</p>
   </section>
   <div class="divider"></div>
 
@@ -714,21 +715,21 @@
         </defs>
         <ellipse cx="100" cy="220" rx="35" ry="65" fill="rgba(255,133,161,0.2)" stroke="#FF85A1" stroke-width="1.5"/>
         <circle cx="100" cy="220" r="55" fill="url(#glowFrom)"/>
-        <text x="100" y="180" text-anchor="middle" fill="#FF85A1" font-family="Nunito, sans-serif" font-size="13" font-weight="700">Bạn</text>
-        <text x="100" y="197" text-anchor="middle" fill="#FF85A1" font-family="Nunito, sans-serif" font-size="10" data-text="fromLocation">Nơi bạn ở</text>
+        <text x="100" y="180" text-anchor="middle" fill="#FF85A1" font-family="Nunito, sans-serif" font-size="13" font-weight="700">Người thương</text>
+        <text x="100" y="197" text-anchor="middle" fill="#FF85A1" font-family="Nunito, sans-serif" font-size="10" data-text="fromLocation">Bắc Ninh</text>
         <circle cx="100" cy="215" r="6" fill="#FF85A1" filter="url(#glow)"/>
         <circle cx="100" cy="215" r="12" fill="#FF85A1" opacity="0.15"/>
         <ellipse cx="490" cy="150" rx="38" ry="50" fill="rgba(168,255,216,0.2)" stroke="#A8FFD8" stroke-width="1.5"/>
         <circle cx="490" cy="150" r="60" fill="url(#glowTo)"/>
-        <text x="490" y="112" text-anchor="middle" fill="#A8FFD8" font-family="Nunito, sans-serif" font-size="13" font-weight="700">Người thương</text>
-        <text x="490" y="129" text-anchor="middle" fill="#A8FFD8" font-family="Nunito, sans-serif" font-size="10" data-text="toLocation">Nơi người thương ở</text>
+        <text x="490" y="112" text-anchor="middle" fill="#A8FFD8" font-family="Nunito, sans-serif" font-size="13" font-weight="700" data-text="recipientShortName">Nhím</text>
+        <text x="490" y="129" text-anchor="middle" fill="#A8FFD8" font-family="Nunito, sans-serif" font-size="10" data-text="toLocation">Hồ Chí Minh</text>
         <circle cx="490" cy="147" r="6" fill="#A8FFD8" filter="url(#glow)"/>
         <circle cx="490" cy="147" r="12" fill="#A8FFD8" opacity="0.15"/>
         <path class="flight-path" d="M120,210 Q300,60 472,155" fill="none" stroke="#A8FFD8" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow)" opacity="0.8"/>
         <g class="plane-icon" id="plane"><text font-size="20" text-anchor="middle">✈️</text></g>
         <rect x="210" y="140" width="180" height="40" rx="10" fill="rgba(192,132,252,0.12)" stroke="rgba(192,132,252,0.3)"/>
-        <text x="300" y="156" text-anchor="middle" fill="#C084FC" font-family="Nunito, sans-serif" font-size="11" font-weight="700" data-text="distance">Khoảng cách của hai bạn</text>
-        <text x="300" y="173" text-anchor="middle" fill="#C084FC" font-family="Nunito, sans-serif" font-size="10" data-text="travelTime">Hành trình để gặp nhau</text>
+        <text x="300" y="156" text-anchor="middle" fill="#C084FC" font-family="Nunito, sans-serif" font-size="11" font-weight="700" data-text="distance">Bắc Ninh ↔ Hồ Chí Minh</text>
+        <text x="300" y="173" text-anchor="middle" fill="#C084FC" font-family="Nunito, sans-serif" font-size="10" data-text="travelTime">Hai nơi, một nhịp tim</text>
       </svg>
       <p class="distance-label">Dù ở nơi đâu, <span>tim vẫn gần</span> ❤️</p>
     </div>
@@ -737,17 +738,17 @@
 
   <section class="about-section">
     <p class="section-label">chân dung người thương</p>
-    <h2 class="section-title" style="text-align:center">Những điều đáng yêu về <span data-text="recipientName">Tên người thương</span> 💫</h2>
+    <h2 class="section-title" style="text-align:center">Những điều đáng yêu về <span data-text="recipientShortName">Nhím</span> 💫</h2>
     <div class="about-grid">
-      <div class="about-card"><span class="about-icon">🌸</span><div class="about-key">Biệt danh</div><div class="about-val" data-text="recipientNickname">Biệt danh thân thương 🌸</div></div>
-      <div class="about-card"><span class="about-icon">✨</span><div class="about-key">Cung hoàng đạo</div><div class="about-val" data-text="zodiac">Cung hoàng đạo</div></div>
-      <div class="about-card"><span class="about-icon">🎂</span><div class="about-key">Sinh nhật</div><div class="about-val" data-text="birthday">Ngày sinh nhật</div></div>
-      <div class="about-card"><span class="about-icon">📍</span><div class="about-key">Đang sống</div><div class="about-val" data-text="residence">Nơi người thương đang sống</div></div>
-      <div class="about-card"><span class="about-icon">🏡</span><div class="about-key">Quê hương</div><div class="about-val" data-text="hometown">Quê hương của người thương</div></div>
-      <div class="about-card"><span class="about-icon">💗</span><div class="about-key">Sở thích</div><div class="about-val" data-text="hobbies">Những điều người thương yêu thích</div></div>
-      <div class="about-card"><span class="about-icon">🌟</span><div class="about-key">Đam mê</div><div class="about-val" data-text="passion">Điều khiến người thương tỏa sáng</div></div>
-      <div class="about-card"><span class="about-icon">💌</span><div class="about-key">Gặp nhau qua</div><div class="about-val" data-text="firstConnection">Cơ duyên của hai bạn</div></div>
-      <div class="about-card"><span class="about-icon">🌙</span><div class="about-key">Tính cách</div><div class="about-val" data-text="personality">Nét đáng yêu rất riêng</div></div>
+      <div class="about-card"><span class="about-icon">🌸</span><div class="about-key">Biệt danh</div><div class="about-val" data-text="recipientNickname">Nhím 🦔</div></div>
+      <div class="about-card"><span class="about-icon">♈</span><div class="about-key">Cung hoàng đạo</div><div class="about-val" data-text="zodiac">Bạch Dương</div></div>
+      <div class="about-card"><span class="about-icon">💗</span><div class="about-key">Ngày mình yêu</div><div class="about-val" data-text="anniversaryLabel">09/08/2026</div></div>
+      <div class="about-card"><span class="about-icon">📍</span><div class="about-key">Đang sống</div><div class="about-val" data-text="residence">Hồ Chí Minh</div></div>
+      <div class="about-card"><span class="about-icon">🏡</span><div class="about-key">Quê hương</div><div class="about-val" data-text="hometown">Đồng Nai</div></div>
+      <div class="about-card"><span class="about-icon">💗</span><div class="about-key">Sở thích</div><div class="about-val" data-text="hobbies">Thích ngọt ngào, dịu dàng và nghe truyện audio</div></div>
+      <div class="about-card"><span class="about-icon">🌟</span><div class="about-key">Đam mê</div><div class="about-val" data-text="passion">Hát, ngắm người khác yêu nhau và thích boylove</div></div>
+      <div class="about-card"><span class="about-icon">💌</span><div class="about-key">Gặp nhau qua</div><div class="about-val" data-text="firstConnection">Minecraft — server Lunar</div></div>
+      <div class="about-card"><span class="about-icon">🌙</span><div class="about-key">Tính cách</div><div class="about-val" data-text="personality">Mộc mạc, đáng yêu, dịu dàng</div></div>
     </div>
   </section>
   <div class="divider"></div>
@@ -756,23 +757,23 @@
     <p class="section-label" style="text-align:center">hành trình của chúng mình</p>
     <h2 class="section-title" style="text-align:center">Từ xa lạ đến thương nhau 🌙</h2>
     <div class="timeline">
-      <div class="tl-item" data-milestone="0"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Lần đầu gặp gỡ</div><div class="tl-text">Một lần tình cờ, một câu chào nhỏ, và câu chuyện của chúng mình bắt đầu. 🌸</div></div></div>
-      <div class="tl-item right" data-milestone="1"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Dần thân quen</div><div class="tl-text">Từ những câu chuyện thường ngày, mình đã có thêm một người để nhớ và mong chờ. ✨</div></div></div>
-      <div class="tl-item" data-milestone="2"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Kỷ niệm đáng nhớ</div><div class="tl-text">Có những khoảnh khắc rất bình thường, nhưng ở bên nhau lại trở thành điều đặc biệt. 💜</div></div></div>
-      <div class="tl-item right" data-milestone="3"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Hôm nay và mai sau</div><div class="tl-text">Cùng viết tiếp câu chuyện này bằng thật nhiều yêu thương và những ngày bình yên. 💗</div></div></div>
+      <div class="tl-item" data-milestone="0"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Gặp nhau ở Lunar</div><div class="tl-text">Chúng mình quen nhau từ server Minecraft tên Lunar. Ban đầu, cả hai cũng chưa nói chuyện nhiều hay có cảm tình gì quá sâu sắc.</div></div></div>
+      <div class="tl-item right" data-milestone="1"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Cùng qua MTCozy</div><div class="tl-text">Sau đó, cả hai cùng qua server MTCozy. Chúng mình bắt đầu nói chuyện nhiều hơn, chơi cùng nhau nhiều hơn.</div></div></div>
+      <div class="tl-item" data-milestone="2"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">09/08/2026 — Mình yêu nhau</div><div class="tl-text">Từ những lần trò chuyện và chơi cùng nhau, hai người dần nảy sinh tình cảm. Như có một sự giao thoa của định mệnh, chúng mình trở thành người thương của nhau. 💗</div></div></div>
+      <div class="tl-item right" data-milestone="3"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Hiện tại và tương lai</div><div class="tl-text">Mong rằng hiện tại và tương lai, chúng mình sẽ luôn cùng nhau tiến bước trong cuộc sống và tình yêu.</div></div></div>
     </div>
   </section>
   <div class="divider"></div>
 
   <section class="gallery-section" aria-label="Album kỷ niệm">
     <p class="section-label">những khoảnh khắc của chúng mình</p>
-    <h2 class="gallery-title">Album người thương ✨</h2>
+    <h2 class="gallery-title">Album của Nhím ✨</h2>
     <div class="carousel" aria-roledescription="băng chuyền ảnh">
       <button class="nav prev" type="button" aria-label="Ảnh trước">❮</button>
       <div class="carousel-track" id="galleryTrack">
-        <div class="slide photo-sample active"><span class="sample-icon" aria-hidden="true">♡</span><strong>Ảnh kỷ niệm 01</strong><small>Khoảnh khắc của hai bạn</small></div>
-        <div class="slide photo-sample"><span class="sample-icon" aria-hidden="true">♡</span><strong>Ảnh kỷ niệm 02</strong><small>Khoảnh khắc của hai bạn</small></div>
-        <div class="slide photo-sample"><span class="sample-icon" aria-hidden="true">♡</span><strong>Ảnh kỷ niệm 03</strong><small>Khoảnh khắc của hai bạn</small></div>
+        <img class="slide active" src="photos/ky-niem-01.png" alt="Hai nhân vật Minecraft bên nhau trong ngôi nhà gỗ">
+        <img class="slide" src="photos/ky-niem-02.png" alt="Kỷ niệm Minecraft dưới những tán hoa">
+        <img class="slide" src="photos/nhim.png" alt="Nhím bên bó hoa">
       </div>
       <button class="nav next" type="button" aria-label="Ảnh tiếp theo">❯</button>
     </div>
@@ -780,24 +781,24 @@
   <div class="divider"></div>
 
   <section class="letter-section">
-    <p class="section-label">gửi <span data-text="recipientName">Tên người thương</span></p>
+    <p class="section-label">gửi <span data-text="recipientShortName">Nhím</span></p>
     <h2 class="section-title">Lời từ trái tim 💌</h2>
     <div class="letter-card">
       <div class="letter-font">
-        <p><span data-text="recipientName">Tên người thương</span> ơi,</p>
+        <p><span data-text="recipientShortName">Nhím</span> ơi,</p>
         <div id="letterParagraphs">
-          <p>Cảm ơn vì đã xuất hiện và làm những ngày bình thường trở nên đáng nhớ hơn.</p>
-          <p>Mong rằng chúng mình sẽ luôn có thể chia sẻ niềm vui, lắng nghe nhau và cùng đi qua những ngày chưa trọn vẹn.</p>
-          <p>Trang nhỏ này là một lời nhắn dịu dàng: có một người luôn dành cho bạn thật nhiều yêu thương. 🌸</p>
+          <p>Một ngày chúng mình nhắn cũng không nhiều, cũng không mấy khi cãi nhau.</p>
+          <p>Chỉ biết rằng được nhắn cho người ấy là vui rồi.</p>
+          <p>Mong hiện tại và tương lai, chúng mình sẽ luôn cùng nhau tiến bước trong cuộc sống và tình yêu. 💗</p>
         </div>
       </div>
-      <div class="letter-sign"><span data-text="senderName">Tên của bạn</span> ❤️</div>
+      <div class="letter-sign"><span data-text="senderName">Người thương của Nhím</span> ❤️</div>
     </div>
   </section>
 
   <footer>
-    <span class="footer-name"><span data-text="recipientName">Tên người thương</span> 🌸</span>
-    <div><span data-text="senderName">Tên của bạn</span> &amp; <span data-text="recipientName">Tên người thương</span></div>
+    <span class="footer-name"><span data-text="recipientName">Trần Phạm Thùy Trang</span> 🌸</span>
+    <div><span data-text="senderName">Người thương của Nhím</span> &amp; <span data-text="recipientName">Trần Phạm Thùy Trang</span></div>
     <div style="margin-top:0.5rem">Được tạo với ❤️ — dành cho câu chuyện của hai bạn</div>
   </footer>
 </main>
@@ -811,7 +812,7 @@ document.querySelectorAll('[data-text]').forEach(function (element) {
 });
 const recipientName = typeof pageConfig.recipientName === 'string' && pageConfig.recipientName.trim()
   ? pageConfig.recipientName : 'Tên người thương';
-document.title = recipientName + ' — Gửi người thương';
+document.title = recipientName + ' — Gửi ' + (pageConfig.recipientShortName || 'người thương');
 
 document.querySelectorAll('[data-milestone]').forEach(function (element) {
   const milestone = (pageConfig.timeline || [])[Number(element.dataset.milestone)];
@@ -948,7 +949,6 @@ function updateCounter() {
   document.getElementById('cnt-days').textContent = hasDate ? Math.floor(minutes / 1440) : '--';
   document.getElementById('cnt-hours').textContent = hasDate ? Math.floor(minutes / 60) % 24 : '--';
   document.getElementById('cnt-mins').textContent = hasDate ? minutes % 60 : '--';
-  document.getElementById('counterHint').hidden = hasDate;
 }
 updateCounter();
 setInterval(updateCounter, 60000);

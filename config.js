@@ -1,52 +1,55 @@
-// Thay các giá trị này cho từng khách. Dùng văn bản thuần, không cần viết HTML.
+// Thông tin và câu chuyện của Nhím.
 window.PAGE_CONFIG = {
-  recipientName: 'Tên người thương',
-  recipientNickname: 'Biệt danh thân thương 🌸',
-  senderName: 'Tên của bạn',
-  birthday: 'Ngày sinh nhật',
-  zodiac: 'Cung hoàng đạo',
-  heroMessage: 'Một góc nhỏ dành riêng cho người thương, nơi lưu giữ những điều dịu dàng của hai chúng mình.',
+  recipientName: 'Trần Phạm Thùy Trang',
+  recipientShortName: 'Nhím',
+  recipientNickname: 'Nhím 🦔',
+  senderName: 'Người thương của Nhím',
+  anniversaryLabel: '09/08/2026',
+  zodiac: 'Bạch Dương',
+  heroMessage: 'Từ Lunar đến MTCozy, từ những người bạn trong Minecraft đến hai người thương của nhau. Câu chuyện của chúng mình bắt đầu như thế. 💗',
 
-  // Ngày bắt đầu: YYYY-MM-DDTHH:mm:ss+07:00. Để trống sẽ hiện -- thay vì đếm từ ngày cũ.
-  metAt: '',
+  // Ngày bắt đầu yêu theo giờ Việt Nam.
+  metAt: '2026-08-09T00:00:00+07:00',
 
-  fromLocation: 'Nơi bạn ở',
-  toLocation: 'Nơi người thương ở',
-  distance: 'Khoảng cách của hai bạn',
-  travelTime: 'Hành trình để gặp nhau',
-  residence: 'Nơi người thương đang sống',
-  hometown: 'Quê hương của người thương',
-  hobbies: 'Những điều người thương yêu thích',
-  passion: 'Điều khiến người thương tỏa sáng',
-  firstConnection: 'Cơ duyên của hai bạn',
-  personality: 'Nét đáng yêu rất riêng',
+  fromLocation: 'Bắc Ninh',
+  toLocation: 'Hồ Chí Minh',
+  distance: 'Bắc Ninh ↔ Hồ Chí Minh',
+  travelTime: 'Hai nơi, một nhịp tim',
+  residence: 'Hồ Chí Minh',
+  hometown: 'Đồng Nai',
+  hobbies: 'Thích ngọt ngào, dịu dàng và nghe truyện audio',
+  passion: 'Hát, ngắm người khác yêu nhau và thích boylove',
+  firstConnection: 'Minecraft — server Lunar',
+  personality: 'Mộc mạc, đáng yêu, dịu dàng',
 
   timeline: [
     {
-      title: 'Lần đầu gặp gỡ',
-      text: 'Một lần tình cờ, một câu chào nhỏ, và câu chuyện của chúng mình bắt đầu. 🌸'
+      title: 'Gặp nhau ở Lunar',
+      text: 'Chúng mình quen nhau từ server Minecraft tên Lunar. Ban đầu, cả hai cũng chưa nói chuyện nhiều hay có cảm tình gì quá sâu sắc.'
     },
     {
-      title: 'Dần thân quen',
-      text: 'Từ những câu chuyện thường ngày, mình đã có thêm một người để nhớ và mong chờ. ✨'
+      title: 'Cùng qua MTCozy',
+      text: 'Sau đó, cả hai cùng qua server MTCozy. Chúng mình bắt đầu nói chuyện nhiều hơn, chơi cùng nhau nhiều hơn.'
     },
     {
-      title: 'Kỷ niệm đáng nhớ',
-      text: 'Có những khoảnh khắc rất bình thường, nhưng ở bên nhau lại trở thành điều đặc biệt. 💜'
+      title: '09/08/2026 — Mình yêu nhau',
+      text: 'Từ những lần trò chuyện và chơi cùng nhau, hai người dần nảy sinh tình cảm. Như có một sự giao thoa của định mệnh, chúng mình trở thành người thương của nhau. 💗'
     },
     {
-      title: 'Hôm nay và mai sau',
-      text: 'Cùng viết tiếp câu chuyện này bằng thật nhiều yêu thương và những ngày bình yên. 💗'
+      title: 'Hiện tại và tương lai',
+      text: 'Mong rằng hiện tại và tương lai, chúng mình sẽ luôn cùng nhau tiến bước trong cuộc sống và tình yêu.'
     }
   ],
 
   letter: [
-    'Cảm ơn vì đã xuất hiện và làm những ngày bình thường trở nên đáng nhớ hơn.',
-    'Mong rằng chúng mình sẽ luôn có thể chia sẻ niềm vui, lắng nghe nhau và cùng đi qua những ngày chưa trọn vẹn.',
-    'Trang nhỏ này là một lời nhắn dịu dàng: có một người luôn dành cho bạn thật nhiều yêu thương. 🌸'
+    'Một ngày chúng mình nhắn cũng không nhiều, cũng không mấy khi cãi nhau.',
+    'Chỉ biết rằng được nhắn cho người ấy là vui rồi.',
+    'Mong hiện tại và tương lai, chúng mình sẽ luôn cùng nhau tiến bước trong cuộc sống và tình yêu. 💗'
   ],
 
-  // Để trống dùng khung ảnh mẫu. Khi có ảnh của khách, thêm vào repo và điền đường dẫn:
-  // { src: 'photos/ky-niem-01.jpg', alt: 'Kỷ niệm của chúng mình' }
-  photos: []
+  photos: [
+    { src: 'photos/ky-niem-01.png', alt: 'Hai nhân vật Minecraft bên nhau trong ngôi nhà gỗ' },
+    { src: 'photos/ky-niem-02.png', alt: 'Kỷ niệm Minecraft dưới những tán hoa' },
+    { src: 'photos/nhim.png', alt: 'Nhím bên bó hoa' }
+  ]
 };
