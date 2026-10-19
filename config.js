@@ -3,7 +3,7 @@ window.PAGE_CONFIG = {
   recipientName: 'Trần Phạm Thùy Trang',
   recipientShortName: 'Nhím',
   recipientNickname: 'Nhím 🦔',
-  senderName: 'Người thương của Nhím',
+  senderName: 'Trần Dương',
   anniversaryLabel: '09/08/2026',
   zodiac: 'Bạch Dương',
   heroMessage: 'Từ Lunar đến MTCozy, từ những người bạn trong Minecraft đến hai người thương của nhau. Câu chuyện của chúng mình bắt đầu như thế. 💗',
